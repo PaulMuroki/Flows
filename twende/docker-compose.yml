@@ -1,8 +1,9 @@
-version: '2'
+version: '3'
 services:
   app:
     build: .
+    command:  ["python", "manage.py", "runserver", "0.0.0.0:8006"]
     volumes:
       - ./:/usr/src/app
     ports:
-      - 8006:80
+      - 8006:8006
