@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from sms.views import AirtelCallback
+from sms.views import AirtelCallback, AirtelUSSDFlow
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("callback", AirtelCallback.as_view())
+    path("callback", AirtelCallback.as_view()),
+    path("ussd", AirtelUSSDFlow.as_view())
 ]
