@@ -2,6 +2,17 @@ initial_screen:
     type: initial_screen
     next_screen: screen_one
 
-screen_one:
+quit_session:
   type: quit_screen
-  text: Testing if this works
+  text: this message shows the session is over
+
+screen_one:
+  type: menu_screen
+  text: Choose your favourite meal
+  error_message: |
+    You have selected invalid option try again
+  options:
+      - text: food
+        next_screen: quit_session
+      - text: fruits
+        next_screen: quit_session
