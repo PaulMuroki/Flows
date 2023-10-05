@@ -10,7 +10,7 @@ def stk_push():
         "Accept": "*/*",
         "X-Country": "KE",
         "X-Currency": "KES",
-        "Authorization": f"Bearer {token}",
+        "Authorization": "Bearer {}".format(token),
     }
     body = {
         "reference": "Insuarance payment",
@@ -52,12 +52,12 @@ def process_stk_push_response(response):
 def get_status_of_previous_transaction(transaction_id):
     print(transaction_id)
     token = get_token()
-    url = f"https://openapi.airtel.africa/standard/v1/payments/{transaction_id}"
+    url = "https://openapi.airtel.africa/standard/v1/payments/{}".format(transaction_id)
     headers ={
         "Accept": "*/*",
         "X-Country": "KE",
         "X-Currency": "KES",
-        "Authorization": f"Bearer {token}",
+        "Authorization": "Bearer {}.format(token)",
     }
     response = requests.get(url=url, headers=headers)
     return response

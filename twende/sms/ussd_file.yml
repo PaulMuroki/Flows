@@ -7,12 +7,51 @@ quit_session:
   text: this message shows the session is over
 
 screen_one:
+  type: input_screen
+  text: Enter your date of birth
+  input_identifier: age
+  next_screen: route_screen
+
+
+route_screen:
+  type: router_screen
+  default_next_screen: quit_session
+  router_options:
+    - expression: "{{18 <= age|int <= 65}}"
+      next_screen: screen_two
+
+screen_two:
   type: menu_screen
-  text: Choose your favourite meal
+  text: Choose the seervice you want {{paul}} {{age_calculator('02-02-2023')}}
   error_message: |
     You have selected invalid option try again
   options:
-      - text: food
+      - text: Pay for insuarance
+        next_screen: screen_three
+      - text: make a claim
+        next_screen: screen_three
+      - text: Not with in the right age
         next_screen: quit_session
-      - text: fruits
-        next_screen: quit_session
+
+
+screen_three:
+  type: menu_screen
+  text: choose the package you want
+  options:
+    - text: 1 Month
+      next_screen: screen_four
+    - text: 1 Year
+      next_screen: quit_session
+    
+
+
+
+screen_four:
+  type: menu_screen
+  text: = ammount to deposit {{stk_push()}}
+  next_screen: quit_session
+
+screen_five:
+  type: menu_screen
+  text: "It will be ivestigated"
+  next_screen: quit_session

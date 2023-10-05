@@ -5,6 +5,15 @@ from ussd.core import UssdView, UssdRequest,UssdResponse
 from django.http import HttpResponse
 import os
 import re
+from sms.stk_push import stk_push
+from datetime import datetime
+
+#response = stk_push()
+
+def age_calculator(dob):
+    dob = datetime.strptime(dob, '%d-%m-%Y')
+    return abs(dob.year-datetime.now().year)
+    
 
 class AirtelCallback(APIView):
     def post(self, request):
@@ -25,7 +34,11 @@ class AirtelUSSDFlow(UssdView):
             phone_number=phone_number,
             ussd_input=user_input,
             language='en',
-            customer_journey_namespace=self.customer_journey_namespace)
+            customer_journey_namespace=self.customer_journey_namespace,
+            paul = 'muroki',
+            age_calculator = age_calculator,
+            stk_push = stk_push
+            )
 
     def ussd_response_handler(self, ussd_response):
         if isinstance(ussd_response, UssdResponse):
